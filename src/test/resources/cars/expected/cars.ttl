@@ -5,9 +5,11 @@ PREFIX foaf:   <http://xmlns.com/foaf/0.1/>
 PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX spdx:   <http://spdx.org/rdf/terms#>
 PREFIX vcard:  <http://www.w3.org/2006/vcard/ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+
 
 <http://localhost:8080/api/access/datafile/4>
-        rdfs:type       dcat:Distribution;
+        a       dcat:Distribution;
         dct:license     <http://creativecommons.org/publicdomain/zero/1.0>;
         dct:rights      <http://publications.europa.eu/resource/authority/access-right/PUBLIC>;
         dct:title       "compute.py";
@@ -19,7 +21,7 @@ PREFIX vcard:  <http://www.w3.org/2006/vcard/ns#>
         dcat:mediaType  "http://www.iana.org/assignments/media-types/text/x-python" .
 
 <http://localhost:8080/api/access/datafile/6>
-        rdfs:type       dcat:Distribution;
+        a       dcat:Distribution;
         dct:license     <http://creativecommons.org/publicdomain/zero/1.0>;
         dct:rights      <http://publications.europa.eu/resource/authority/access-right/PUBLIC>;
         dct:title       "stata13-auto.tab";
@@ -31,24 +33,24 @@ PREFIX vcard:  <http://www.w3.org/2006/vcard/ns#>
         dcat:mediaType  "http://www.iana.org/assignments/media-types/text/tab-separated-values" .
 
 <https://doi.org/10.5072/FK2/6ZUDGC>
-        rdfs:type          dcat:Dataset;
-        dct:creator        [ rdfs:type                foaf:Person;
-                             vcard:organization-name  "DANS"@en;
+        a          dcat:Dataset;
+        dct:creator        [ a                foaf:Person;
+                             vcard:org  "DANS"@en;
                              foaf:name                "Boon, Paul"@en
                            ];
-        dct:creator        [ rdfs:type                foaf:Person;
-                             vcard:organization-name  "Harvard"@en;
+        dct:creator        [ a                foaf:Person;
+                             vcard:org  "Harvard"@en;
                              foaf:name                "Durbin, Philip"@en
                            ];
         dct:description    "This dataset is about cars."@en;
-        dct:identifier     "https://doi.org/10.5072/FK2/6ZUDGC";
-        dct:issued         "2024-03-20";
+        dct:identifier     <https://doi.org/10.5072/FK2/6ZUDGC>;
+        dct:issued         "2024-03-20"^^xsd:date;
         dct:language       "Danish"@en , "Dutch"@en , "English"@en;
-        dct:modified       "2024-03-20";
+        dct:modified       "2024-03-20"^^xsd:date;
         dct:title          "Cars"@en;
         dcat:contactPoint  [ vcard:fn                 "Durbin, Philip"@en;
                              vcard:hasEmail           "mailto:dataverse@mailinator.com";
-                             vcard:organization-name  "Harvard"@en
+                             vcard:org  "Harvard"@en
                            ];
         dcat:distribution  <http://localhost:8080/api/access/datafile/4> , <http://localhost:8080/api/access/datafile/6> , <http://localhost:8080/api/access/datafile/5>;
         dcat:keyword       "Vehicles"@en , "Transportation"@en , "Automobiles"@en;
@@ -56,7 +58,7 @@ PREFIX vcard:  <http://www.w3.org/2006/vcard/ns#>
         dcat:version       "V1.0" .
 
 <http://localhost:8080/api/access/datafile/5>
-        rdfs:type       dcat:Distribution;
+        a       dcat:Distribution;
         dct:license     <http://creativecommons.org/publicdomain/zero/1.0>;
         dct:rights      <http://publications.europa.eu/resource/authority/access-right/PUBLIC>;
         dct:title       "README.md";
