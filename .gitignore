@@ -3,3 +3,4 @@ target
 # however the content changes even if the code did not
 src/test/resources/cars/out
 /.flattened-pom.xml
+DCAT-AP/
