@@ -1,0 +1,12 @@
+PREFIX sh:     <http://www.w3.org/ns/shacl#>
+
+
+
+SELECT ?result ?focusNode ?msg
+WHERE {
+    ?result a sh:ValidationResult ;
+            sh:resultSeverity sh:Violation;
+            sh:focusNode ?focusNode ;
+            sh:resultMessage ?msg
+
+}

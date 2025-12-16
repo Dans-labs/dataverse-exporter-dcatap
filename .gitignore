@@ -4,3 +4,4 @@ target
 src/test/resources/cars/out
 /.flattened-pom.xml
 DCAT-AP/
+.tmp/
