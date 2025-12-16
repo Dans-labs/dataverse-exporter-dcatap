@@ -20,8 +20,12 @@ https://guides.dataverse.org/en/latest/installation/config.html#dataverse-spi-ex
 
 ## Exporter Output
 
-In order to test compliance of the exporter's output (.ttl or .jsonln) with DCAT-AP specification, the recommended approach is to validate the ttl output against the DCAT-AP SHACL shape [dcat-ap-SHACL.ttl](https://github.com/SEMICeu/DCAT-AP/blob/master/releases/3.0.0/shacl/dcat-ap-SHACL.ttl).
+In order to test compliance of the exporter's output with the DCAT-AP specification, the recommended approach is to validate exporter's output against the DCAT-AP SHACL shape [dcat-ap-SHACL.ttl](https://github.com/SEMICeu/DCAT-AP/blob/master/releases/3.0.0/shacl/dcat-ap-SHACL.ttl).
 
-Currently, the compliance testing uses the example output file [src/test/resources/cars/expected/cars.ttl](src/test/resources/cars/expected/cars.ttl), which is validated through the script [src/test/test-output.sh](src/test/test-output.sh), which employs (APACHE Jena shacl application)[https://jena.apache.org/documentation/shacl/].
+Compliance testing is performed against example output file [src/test/resources/cars/expected/cars.ttl](src/test/resources/cars/expected/cars.ttl), which is validated through the script [src/test/test-output.sh](src/test/test-output.sh). Testing results are stored in (non-tracked) files:
+* `src/test/resources/cars/validation_output.ttl` containing the full validation report
+* `src/test/resources/cars/shacl-results.csv` containing the validation report
 
-The objective, for the future, is for this compliance testing to run as an automated Github Action. Ideally the Github Action runner.   
+**Requirements**:
+* APACHE Jena [SHACL validator](https://jena.apache.org/documentation/shacl/)
+* APACHE Jena [ARQ SPARQL processor](https://jena.apache.org/documentation/query/)

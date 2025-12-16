@@ -2,10 +2,14 @@
 
 # Summary: SHACL validation of example .ttl agains DCAT-AP SHACL shapes
 
-# Requires APACHE Jena shacl application https://jena.apache.org/documentation/shacl/
+# Requires APACHE Jena shacl and arq applications https://jena.apache.org/documentation/shacl/ https://jena.apache.org/documentation/query/
 
-DATA=./resources/cars/expected/cars.ttl
+DATA=src/test/resources/cars/expected/cars.ttl
 SHACLshapes=DCAT-AP/releases/3.0.0/shacl/dcat-ap-SHACL.ttl
+SHACLresultsQuery=src/test/resources/cars/sparql/shacl-results.rq
+SHACLresultsSummaryQuery=src/test/resources/cars/validation_output.ttl
+SHACLresultsSummary=src/test/resources/cars/shacl-results.csv
+
 DCATrepo=https://github.com/SEMICeu/DCAT-AP.git 
 DCATbranch=3.0.0
 
@@ -16,5 +20,6 @@ fi
 
 
 # validate
-shacl validate --shapes $SHACLshapes --data $DATA
-
+shacl validate --shapes $SHACLshapes --data $DATA > $SHACLresultsSummaryQuery
+# produce summary
+arq --query $SHACLresultsQuery --data $SHACLresultsSummaryQuery --results=CSV > $SHACLresultsSummary

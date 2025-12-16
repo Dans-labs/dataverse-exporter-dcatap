@@ -2,6 +2,8 @@ target
 # I see no harm in exposing the test output
 # however the content changes even if the code did not
 src/test/resources/cars/out
+src/test/resources/cars/validation_output.ttl
+src/test/resources/cars/shacl-results.csv
 /.flattened-pom.xml
 DCAT-AP/
 .tmp/
