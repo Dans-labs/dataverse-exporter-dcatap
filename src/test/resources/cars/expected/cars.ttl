@@ -9,7 +9,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 
 <http://localhost:8080/api/access/datafile/4>
-        a       dcat:Distribution;
+        a               dcat:Distribution;
         dct:license     <http://creativecommons.org/publicdomain/zero/1.0>;
         dct:rights      <http://publications.europa.eu/resource/authority/access-right/PUBLIC>;
         dct:title       "compute.py";
@@ -21,7 +21,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         dcat:mediaType  "http://www.iana.org/assignments/media-types/text/x-python" .
 
 <http://localhost:8080/api/access/datafile/6>
-        a       dcat:Distribution;
+        a               dcat:Distribution;
         dct:license     <http://creativecommons.org/publicdomain/zero/1.0>;
         dct:rights      <http://publications.europa.eu/resource/authority/access-right/PUBLIC>;
         dct:title       "stata13-auto.tab";
@@ -33,20 +33,20 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         dcat:mediaType  "http://www.iana.org/assignments/media-types/text/tab-separated-values" .
 
 <https://doi.org/10.5072/FK2/6ZUDGC>
-        a          dcat:Dataset;
-        dct:creator        [ a                foaf:Person;
-                             vcard:org  "DANS"@en;
-                             foaf:name                "Boon, Paul"@en
-                           ];
-        dct:creator        [ a                foaf:Person;
-                             vcard:org  "Harvard"@en;
+        a                  dcat:Dataset;
+        dct:creator        [ rdfs:type                foaf:Person;
+                             vcard:organization-name  "Harvard"@en;
                              foaf:name                "Durbin, Philip"@en
                            ];
+        dct:creator        [ rdfs:type                foaf:Person;
+                             vcard:organization-name  "DANS"@en;
+                             foaf:name                "Boon, Paul"@en
+                           ];
         dct:description    "This dataset is about cars."@en;
-        dct:identifier     <https://doi.org/10.5072/FK2/6ZUDGC>;
-        dct:issued         "2024-03-20"^^xsd:date;
+        dct:identifier     "https://doi.org/10.5072/FK2/6ZUDGC";
+        dct:issued         "2024-03-20"^^<http://www.w3.org/2001/XMLSchema#date>;
         dct:language       "Danish"@en , "Dutch"@en , "English"@en;
-        dct:modified       "2024-03-20"^^xsd:date;
+        dct:modified       "2024-03-20"^^<http://www.w3.org/2001/XMLSchema#date>;
         dct:title          "Cars"@en;
         dcat:contactPoint  [ vcard:fn                 "Durbin, Philip"@en;
                              vcard:hasEmail           "mailto:dataverse@mailinator.com";
@@ -58,7 +58,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         dcat:version       "V1.0" .
 
 <http://localhost:8080/api/access/datafile/5>
-        a       dcat:Distribution;
+        a               dcat:Distribution;
         dct:license     <http://creativecommons.org/publicdomain/zero/1.0>;
         dct:rights      <http://publications.europa.eu/resource/authority/access-right/PUBLIC>;
         dct:title       "README.md";

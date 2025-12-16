@@ -12,19 +12,12 @@ import jakarta.ws.rs.core.MediaType;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Locale;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.impl.RDFWriterFImpl;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFDataMgr;
-import org.apache.jena.riot.RDFFormat;
-import org.apache.jena.riot.RDFFormatVariant;
-import org.apache.jena.riot.RDFLanguages;
-import org.apache.jena.riot.RDFWriter;
-import org.apache.jena.riot.writer.RDFJSONWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 // Maybe use vocabs, but for now just use strings which I like more
 //import org.apache.jena.vocabulary.RDFS;
 
@@ -46,6 +39,7 @@ public class DCATAPExporter implements XMLExporter {
     static String VCARD = "http://www.w3.org/2006/vcard/ns#";
     static String FOAF = "http://xmlns.com/foaf/0.1/";
     static String SPDX = "http://spdx.org/rdf/terms#";
+    static String RDF = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
     
     // Use this for testing different output formats ONLY!
     // unfortunately, it is just a string, so no enum or such
@@ -93,7 +87,7 @@ public class DCATAPExporter implements XMLExporter {
 
     @Override
     public String getXMLNameSpace() {
-        return "http://purl.org/dc/terms/ http://spdx.org/rdf/terms# http://www.w3.org/1999/02/22-rdf-syntax-ns# http://data.europa.eu/r5r/ http://www.w3.org/2006/vcard/ns# http://www.w3.org/ns/dcat# http://www.w3.org/2000/01/rdf-schema# http://xmlns.com/foaf/0.1/";
+        return "http://www.w3.org/1999/02/22-rdf-syntax-ns# http://purl.org/dc/terms/ http://spdx.org/rdf/terms# http://www.w3.org/1999/02/22-rdf-syntax-ns# http://data.europa.eu/r5r/ http://www.w3.org/2006/vcard/ns# http://www.w3.org/ns/dcat# http://www.w3.org/2000/01/rdf-schema# http://xmlns.com/foaf/0.1/";
     }
 
     @Override
@@ -198,7 +192,8 @@ public class DCATAPExporter implements XMLExporter {
         model.setNsPrefix("vcard", VCARD);
         model.setNsPrefix("foaf", FOAF);
         model.setNsPrefix("spdx", SPDX);
-
+        // model.setNsPrefix("rdf", RDF); // we do not need to define rdf prefix ourselves
+        
         String identifier = datasetJson.getString("identifier", "");
         // note that with protocol and authority we can build a persistent URL as well
         String persistentURL = datasetJson.getString("persistentUrl", "");
@@ -208,7 +203,7 @@ public class DCATAPExporter implements XMLExporter {
         Resource datasetModel = model.createResource(persistentURL);
         
         // Note that this is not the DCT type, but the RDF type
-        datasetModel.addProperty(model.createProperty(RDFS, "type"), model.createResource(DCAT + "Dataset"));
+        datasetModel.addProperty(model.createProperty(RDF, "type"), model.createResource(DCAT + "Dataset"));
 
         //--- 
         // DCAT-AP Dataset Property: landing page
@@ -276,7 +271,8 @@ public class DCATAPExporter implements XMLExporter {
         //--- 
         // DCAT-AP Dataset Property: release date
         String pubDate = datasetVersion.getString("publicationDate", "no-publication-date");
-        datasetModel.addProperty(model.createProperty(DCT, "issued"), pubDate);
+        // check if we can parse the date properly?
+        datasetModel.addProperty(model.createProperty(DCT, "issued"), model.createTypedLiteral(pubDate, XSDDatatype.XSDdate));
         
         //---
         // DCAT-AP Dataset Property: modification date
@@ -290,7 +286,7 @@ public class DCATAPExporter implements XMLExporter {
         } catch (Exception e) {
             System.out.println("Failed to parse lastUpdateTime: " + lastUpdateTime);
         }
-        datasetModel.addProperty(model.createProperty(DCT, "modified"), formattedLastUpdateTime);
+        datasetModel.addProperty(model.createProperty(DCT, "modified"), model.createTypedLiteral(formattedLastUpdateTime, XSDDatatype.XSDdate));
         
         //---
         // DCAT-AP Dataset Property: provenance
@@ -462,7 +458,7 @@ public class DCATAPExporter implements XMLExporter {
         Resource distribution = model.createResource("http://localhost:8080/api/access/datafile/" + id);
         //Resource distribution = model.createResource();
         
-        distribution.addProperty(model.createProperty(RDFS, "type"), model.createResource(DCAT + "Distribution"));
+        distribution.addProperty(model.createProperty(RDF, "type"), model.createResource(DCAT + "Distribution"));
 
         //---
         // DCAT-AP Distribution Property: download URL

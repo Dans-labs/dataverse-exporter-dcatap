@@ -10,7 +10,7 @@
 
   <groupId>io.gdcc.export</groupId>
   <artifactId>dcat-ap</artifactId>
-  <version>0.3.0-SNAPSHOT</version>
+  <version>0.4.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>DCAT-AP Exporter for Dataverse</name>
   <description>This exporter plugin can be added to a Dataverse installation.</description>
