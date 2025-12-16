@@ -1,0 +1,10 @@
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+SELECT ?dataset ?dist ?dist_class ?dist_title {
+    ?dataset a dcat:Dataset ;
+             dcat:distribution ?dist .
+    ?dist    a ?dist_class ;
+             dct:title ?dist_title 
+
+}

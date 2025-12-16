@@ -5,6 +5,8 @@ PREFIX foaf:   <http://xmlns.com/foaf/0.1/>
 PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX spdx:   <http://spdx.org/rdf/terms#>
 PREFIX vcard:  <http://www.w3.org/2006/vcard/ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+
 
 <http://localhost:8080/api/access/datafile/4>
         a               dcat:Distribution;
@@ -48,7 +50,7 @@ PREFIX vcard:  <http://www.w3.org/2006/vcard/ns#>
         dct:title          "Cars"@en;
         dcat:contactPoint  [ vcard:fn                 "Durbin, Philip"@en;
                              vcard:hasEmail           "mailto:dataverse@mailinator.com";
-                             vcard:organization-name  "Harvard"@en
+                             vcard:org  "Harvard"@en
                            ];
         dcat:distribution  <http://localhost:8080/api/access/datafile/4> , <http://localhost:8080/api/access/datafile/6> , <http://localhost:8080/api/access/datafile/5>;
         dcat:keyword       "Vehicles"@en , "Transportation"@en , "Automobiles"@en;
